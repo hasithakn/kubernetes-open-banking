@@ -332,7 +332,9 @@ data:
     "http.headers.preserve"="Content-Type,Date"
 
     [transport.passthru_https.listener.parameters]
-    "SSLVerifyClient" = "optional"
+    HttpsProtocols = "TLSv1.2"
+    PreferredCiphers = "TLS_DHE_RSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256,TLS_DHE_RSA_WITH_AES_256_GCM_SHA384, TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384"
+
 
     #================configs related to identity.xml=============
 
@@ -437,31 +439,23 @@ data:
     use_softwareIdForAppName = true
 
     [open_banking.dcr.apim_rest_endpoints]
-    app_creation = "api/am/devportal/v3/applications"
-    key_generation = "api/am/devportal/v3/applications/application-id/map-keys"
-    api_retrieve = "api/am/devportal/v3/apis"
-    api_subscribe = "api/am/devportal/v3/subscriptions/multiple"
-    retrieve_subscribe="api/am/devportal/v3/subscriptions"
+    app_creation = "api/am/devportal/v2/applications"
+    key_generation = "api/am/devportal/v2/applications/application-id/map-keys"
+    api_retrieve = "api/am/devportal/v2/apis"
+    api_subscribe = "api/am/devportal/v2/subscriptions/multiple"
+    retrieve_subscribe="api/am/devportal/v2/subscriptions"
 
     #[open_banking.dcr.jwks_retriever]
     #connection_timeout = 3000
     #read_timeout = 3000
 
     [[open_banking.dcr.regulatory_api]]
-    api_name = "DynamicClientRegistrationAPI"
-    roles = "AISP,PISP,CBPII"
+    api_name = "CDR-DynamicClientRegistration"
+    roles = "AISP,PISP"
 
     [[open_banking.dcr.regulatory_api]]
-    api_name = "AccountAndTransactionAPI"
+    api_name = "AccountandTransactionAPI"
     roles = "AISP"
-
-    [[open_banking.dcr.regulatory_api]]
-    api_name = "PaymentInitiationAPI"
-    roles = "PISP"
-
-    [[open_banking.dcr.regulatory_api]]
-    api_name = "ConfirmationOfFundsAPI"
-    roles = "CBPII"
 
     #============executors=========================
     [[open_banking.gateway.openbanking_gateway_executors.type]]
@@ -476,31 +470,13 @@ data:
     name = "com.wso2.openbanking.accelerator.gateway.executor.impl.api.resource.access.validation.APIResourceAccessValidationExecutor"
     priority = 3
     [[open_banking.gateway.openbanking_gateway_executors.type.executors]]
-    name = "com.wso2.openbanking.uk.gateway.executors.jws.UKJwsRequestHandlingExecutor"
+    name = "com.wso2.openbanking.accelerator.gateway.executor.impl.consent.ConsentEnforcementExecutor"
     priority = 4
     [[open_banking.gateway.openbanking_gateway_executors.type.executors]]
-    name = "com.wso2.openbanking.uk.gateway.executors.idempotency.OpenBankingIdempotencyHandlingExecutorUKImpl"
+    name = "com.wso2.openbanking.accelerator.gateway.executor.impl.common.reporting.data.executor.CommonReportingDataExecutor"
     priority = 5
     [[open_banking.gateway.openbanking_gateway_executors.type.executors]]
-    name = "com.wso2.openbanking.uk.gateway.executors.request.validation.UKRequestValidationExecutor"	
-    priority = 6	
-    [[open_banking.gateway.openbanking_gateway_executors.type.executors]]	
-    name = "com.wso2.openbanking.accelerator.gateway.executor.impl.consent.ConsentEnforcementExecutor"	
-    priority = 7	
-    [[open_banking.gateway.openbanking_gateway_executors.type.executors]]	
-    name = "com.wso2.openbanking.accelerator.gateway.executor.impl.common.reporting.data.executor.CommonReportingDataExecutor"	
-    priority = 8	
-    [[open_banking.gateway.openbanking_gateway_executors.type.executors]]	
-    name = "com.wso2.openbanking.uk.gateway.executors.reporting.UKDataReportingExecutor"	
-    priority = 9	
-    [[open_banking.gateway.openbanking_gateway_executors.type.executors]]	
-    name = "com.wso2.openbanking.uk.gateway.executors.vrp.UKVRPResponseExecutor"	
-    priority = 10
-    [[open_banking.gateway.openbanking_gateway_executors.type.executors]]
-    name = "com.wso2.openbanking.uk.gateway.executors.jws.UKJwsResponseHandlingExecutor"
-    priority = 999
-    [[open_banking.gateway.openbanking_gateway_executors.type.executors]]
-    name = "com.wso2.openbanking.uk.gateway.executors.error.handling.UKErrorHandlingExecutor"
+    name = "com.wso2.openbanking.accelerator.gateway.executor.impl.error.handler.OBDefaultErrorHandler"
     priority = 1000
 
     [[open_banking.gateway.openbanking_gateway_executors.type]]
@@ -515,10 +491,7 @@ data:
     name = "com.wso2.openbanking.accelerator.gateway.executor.dcr.DCRExecutor"
     priority = 3
     [[open_banking.gateway.openbanking_gateway_executors.type.executors]]
-    name = "com.wso2.openbanking.uk.gateway.executors.reporting.UKDCRDataReportingExecutor"
-    priority = 4
-    [[open_banking.gateway.openbanking_gateway_executors.type.executors]]
-    name = "com.wso2.openbanking.uk.gateway.executors.error.handling.UKErrorHandlingExecutor"
+    name = "com.wso2.openbanking.accelerator.gateway.executor.impl.error.handler.OBDefaultErrorHandler"
     priority = 1000
 
     [open_banking.apim.analytics]
@@ -621,237 +594,6 @@ data:
     required=true
     type="long"
 
-    [[open_banking.data_publishing.thrift.stream]]
-    name="AppRegInputStream"
-    [[open_banking.data_publishing.thrift.stream.attributes]]
-    name="clientId"
-    priority=1
-    required=true
-    [[open_banking.data_publishing.thrift.stream.attributes]]
-    name="appEnvironment"
-    priority=2
-    [[open_banking.data_publishing.thrift.stream.attributes]]
-    name="appRoles"
-    priority=3
-    [[open_banking.data_publishing.thrift.stream.attributes]]
-    name="appName"
-    priority=4
-    required=true
-    [[open_banking.data_publishing.thrift.stream.attributes]]
-    name="appSoftwareId"
-    priority=5
-    required=true
-    [[open_banking.data_publishing.thrift.stream.attributes]]
-    name="appStatus"
-    priority=6
-    required=true
-    [[open_banking.data_publishing.thrift.stream.attributes]]
-    name="timestamp"
-    priority=7
-    required=true
-    type="long"
-
-    [[open_banking.data_publishing.thrift.stream]]
-    name="AccountsInputStream"
-    [[open_banking.data_publishing.thrift.stream.attributes]]
-    name="consentId"
-    priority=1
-    [[open_banking.data_publishing.thrift.stream.attributes]]
-    name="userId"
-    priority=2
-    [[open_banking.data_publishing.thrift.stream.attributes]]
-    name="tppId"
-    priority=3
-    [[open_banking.data_publishing.thrift.stream.attributes]]
-    name="clientId"
-    priority=4
-    [[open_banking.data_publishing.thrift.stream.attributes]]
-    name="accountId"
-    priority=5
-    [[open_banking.data_publishing.thrift.stream.attributes]]
-    name="authorisationStatus"
-    priority=6
-    [[open_banking.data_publishing.thrift.stream.attributes]]
-    name="reAuthorisation"
-    priority=7
-    type="bool"
-    [[open_banking.data_publishing.thrift.stream.attributes]]
-    name="timestamp"
-    priority=8
-    required=true
-    type="long"
-    [[open_banking.data_publishing.thrift.stream.attributes]]
-    name="apiSpecVersion"
-    priority=9
-    [[open_banking.data_publishing.thrift.stream.attributes]]
-    name="consentType"
-    priority=10
-    [[open_banking.data_publishing.thrift.stream.attributes]]
-    name="expirationDateTime"
-    priority=11
-    [[open_banking.data_publishing.thrift.stream.attributes]]
-    name="psuInteractionTime"
-    priority=12
-    type="long"
-    [[open_banking.data_publishing.thrift.stream.attributes]]
-    name="messageId"
-    priority=13
-
-    [[open_banking.data_publishing.thrift.stream]]
-    name="FundsConfirmationInputStream"
-    [[open_banking.data_publishing.thrift.stream.attributes]]
-    name="consentId"
-    priority=1
-    [[open_banking.data_publishing.thrift.stream.attributes]]
-    name="userId"
-    priority=2
-    [[open_banking.data_publishing.thrift.stream.attributes]]
-    name="tppId"
-    priority=3
-    [[open_banking.data_publishing.thrift.stream.attributes]]
-    name="clientId"
-    priority=4
-    [[open_banking.data_publishing.thrift.stream.attributes]]
-    name="debtorAccountId"
-    priority=5
-    [[open_banking.data_publishing.thrift.stream.attributes]]
-    name="authorisationStatus"
-    priority=6
-    [[open_banking.data_publishing.thrift.stream.attributes]]
-    name="timestamp"
-    priority=7
-    required=true
-    type="long"
-    [[open_banking.data_publishing.thrift.stream.attributes]]
-    name="apiSpecVersion"
-    priority=8
-    [[open_banking.data_publishing.thrift.stream.attributes]]
-    name="consentType"
-    priority=9
-    [[open_banking.data_publishing.thrift.stream.attributes]]
-    name="expirationDateTime"
-    priority=10
-    [[open_banking.data_publishing.thrift.stream.attributes]]
-    name="psuInteractionTime"
-    priority=11
-    type="long"
-    [[open_banking.data_publishing.thrift.stream.attributes]]
-    name="messageId"
-    priority=12
-
-    [[open_banking.data_publishing.thrift.stream]]
-    name="CoFAccessHistoryInputStream"
-    [[open_banking.data_publishing.thrift.stream.attributes]]
-    name="consentId"
-    priority=1
-    [[open_banking.data_publishing.thrift.stream.attributes]]
-    name="clientId"
-    priority=2
-    [[open_banking.data_publishing.thrift.stream.attributes]]
-    name="timestamp"
-    priority=3
-    required=true
-    type="long"
-    [[open_banking.data_publishing.thrift.stream.attributes]]
-    name="amount"
-    priority=4
-    [[open_banking.data_publishing.thrift.stream.attributes]]
-    name="currency"
-    priority=5
-    [[open_banking.data_publishing.thrift.stream.attributes]]
-    name="reference"
-    priority=6
-    [[open_banking.data_publishing.thrift.stream.attributes]]
-    name="response"
-    priority=7
-    [[open_banking.data_publishing.thrift.stream.attributes]]
-    name="electedResource"
-    priority=8
-    [[open_banking.data_publishing.thrift.stream.attributes]]
-    name="statusCode"
-    priority=9
-    type="int"
-    [[open_banking.data_publishing.thrift.stream.attributes]]
-    name="statusMessage"
-    priority=10
-    [[open_banking.data_publishing.thrift.stream.attributes]]
-    name="messageId"
-    priority=11
-
-    [[open_banking.data_publishing.thrift.stream]]
-    name="PaymentInputStream"
-    [[open_banking.data_publishing.thrift.stream.attributes]]
-    name="consentId"
-    priority=1
-    [[open_banking.data_publishing.thrift.stream.attributes]]
-    name="userId"
-    priority=2
-    [[open_banking.data_publishing.thrift.stream.attributes]]
-    name="tppId"
-    priority=3
-    [[open_banking.data_publishing.thrift.stream.attributes]]
-    name="clientId"
-    priority=4
-    [[open_banking.data_publishing.thrift.stream.attributes]]
-    name="paymentType"
-    priority=5
-    [[open_banking.data_publishing.thrift.stream.attributes]]
-    name="authorisationStatus"
-    priority=6
-    [[open_banking.data_publishing.thrift.stream.attributes]]
-    name="timestamp"
-    priority=7
-    required=true
-    type="long"
-    [[open_banking.data_publishing.thrift.stream.attributes]]
-    name="creditorAccountId"
-    priority=8
-    [[open_banking.data_publishing.thrift.stream.attributes]]
-    name="debtorAccountId"
-    priority=9
-    [[open_banking.data_publishing.thrift.stream.attributes]]
-    name="multiAuthorisation"
-    priority=10
-    type="bool"
-    [[open_banking.data_publishing.thrift.stream.attributes]]
-    name="currency"
-    priority=11
-    [[open_banking.data_publishing.thrift.stream.attributes]]
-    name="amount"
-    priority=12
-    [[open_banking.data_publishing.thrift.stream.attributes]]
-    name="noOfTransactions"
-    priority=13
-    [[open_banking.data_publishing.thrift.stream.attributes]]
-    name="localInstrument"
-    priority=14
-    [[open_banking.data_publishing.thrift.stream.attributes]]
-    name="paymentSubmissionId"
-    priority=15
-    [[open_banking.data_publishing.thrift.stream.attributes]]
-    name="multiAuthUserCount"
-    priority=16
-    type="int"
-    [[open_banking.data_publishing.thrift.stream.attributes]]
-    name="apiSpecVersion"
-    priority=17
-    [[open_banking.data_publishing.thrift.stream.attributes]]
-    name="deliveryAddress"
-    priority=18
-    [[open_banking.data_publishing.thrift.stream.attributes]]
-    name="consentType"
-    priority=19
-    [[open_banking.data_publishing.thrift.stream.attributes]]
-    name="paymentRefund"
-    priority=20
-    [[open_banking.data_publishing.thrift.stream.attributes]]
-    name="psuInteractionTime"
-    priority=21
-    type="long"
-    [[open_banking.data_publishing.thrift.stream.attributes]]
-    name="messageId"
-    priority=22
-
     [[apim.extension.listener]]
     type = "AUTHENTICATION"
     class = "com.wso2.openbanking.accelerator.gateway.executor.core.OBExtensionListenerImpl"
@@ -873,6 +615,10 @@ data:
     [open_banking.gateway.certificate_management.certificate.revocation]
     enabled = true
     retry_count = 3
+    connect_timeout = 10000
+    connection_request_timeout = 10000
+    socket_timeout = 10000
+
     [open_banking.gateway.certificate_management.certificate.revocation.proxy]
     enabled = false
     host = "PROXY_HOSTNAME"
@@ -916,69 +662,19 @@ data:
     worker_thread_count = 10
     event_executor = "com.wso2.openbanking.accelerator.common.event.executor.DefaultOBEventExecutor"
 
-    #============to increase the https header size===============
-    [transport.https.properties]
-    maxHttpHeaderSize = 16384
-    proxyPort = 443
-
-    [open_banking.gateway.consent.validation]
-    endpoint = "https://{{ template "ob-pattern-5.resource.prefix" . }}-obiam-service:9446/api/openbanking/consent/validate"
-
-    #===================UK Toolkit====================
-    [open_banking_uk.consent]
-    payable_account_retrieval_endpoint = "http://{{ template "ob-pattern-5.resource.prefix" . }}-obam-service:9763/api/openbanking/uk/backend/services/bankaccounts/bankaccountservice/payable-accounts"
-    sharable_account_retrieval_endpoint = "http://{{ template "ob-pattern-5.resource.prefix" . }}-obam-service:9763/api/openbanking/uk/backend/services/bankaccounts/bankaccountservice/sharable-accounts"
-    account_consent_self_link = "https://{{ template "ob-pattern-5.resource.prefix" . }}-obam-service:8243/open-banking/{version}/aisp/"
-    payment_consent_self_link = "https://{{ template "ob-pattern-5.resource.prefix" . }}-obam-service:8243/open-banking/{version}/pisp/"
-    vrp_consent_self_link = "https://{{ template "ob-pattern-5.resource.prefix" . }}-obam-service:8243/open-banking/{version}/vrp/"
-    cof_consent_self_link = "https://{{ template "ob-pattern-5.resource.prefix" . }}-obam-service:8243/open-banking/{version}/cbpii/"
-
-
-    [open_banking_uk.consent.payment_restrictions.cutoff_date]
-    enabled = false
-    policy = "ACCEPT"
-    daily_cutoff = "12:30:30+00:01"
-    execution_time = "10:30:30+00:01"
-    settlement_time = "11:30:30+00:01"
-
-    #========================OB Distributed Cache Configurations===============================
-    [open_banking.distributed_cache]
-    enabled=true
-    host_name="{{ template "ob-pattern-5.resource.prefix" . }}-obam-service"
-    port=5701
-    discovery_mechanism="TCP"
-    #members=["192.168.1.0-7", "localhost:5703"]
-    [open_banking.distributed_cache.properties]
-    max_heartbeat=600
-    max_master_confirmation=900
-    merge_first_run_delay=60
-    merge_next_run_delay=30
-    logging_type="none"
-
-    #========================OB Idempotency Configurations======================
-    [open_banking.gateway.cache.idempotency_validation_cache]
-    cache_time_to_live=1440
-    [open_banking.gateway.idempotency]
-    enabled=true
-    allowed_time_duration=1440
-    idempotency_key_header="x-idempotency-key"
-
     #========================OB JWS Signature Validation & Response Signing Configurations======================
     [open_banking.common.identity.cache]
-    cache_modified_expiry_minutes=60
-    cache_access_expiry_minutes=60
+    cache_modified_expiry_minuites=30
+    cache_access_expiry_minuites=30
 
     [open_banking.jws_signature.signature_validation]
-    enabled=true
+    enabled=false
 
     [[open_banking.jws_signature.signature_validation.allowed_algorithms]]
     algorithm="PS256"
 
-    [[open_banking.jws_signature.signature_validation.allowed_algorithms]]
-    algorithm="ES256"
-
     [open_banking.jws_signature.response_signing]
-    enabled=true
+    enabled=false
     allowed_algorithm="PS256"
 
     [open_banking.ob_identity_retriever.server]
@@ -991,17 +687,3 @@ data:
     size_limit=51200
     connection_timeout=2000
     read_timeout=2000
-
-    #============UK Related Configs for JWS Signature Validation & Response Signing===============
-    [open_banking.uk.jws_signature.obie]
-    org_id="0015800001HQQrZAAX"
-
-    [open_banking.uk.jws_signature.obie.trusted_anchors]
-    signature_validation="openbanking.org.uk"
-    response_signing="openbanking.org.uk"
-
-    [[open_banking.uk.jws_signature.signature_validation.mandated_apis]]
-    api_context="/open-banking/v3.1/event"
-
-    [[open_banking.uk.jws_signature.response_signing.response_sig_required_apis]]
-    api_context="/open-banking/v3.1/event"

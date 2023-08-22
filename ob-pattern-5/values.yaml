@@ -24,8 +24,8 @@ wso2:
         # Container image configurations
         # If a custom image must be used, uncomment 'dockerRegistry' and provide its value
         # dockerRegistry: ""
-        imageName: "wso2-obam-toolkit-uk"
-        imageTag: "1.0.0.9-acc3.0.0.41-am4.2.0.3"
+        imageName: "wso2-obam"
+        imageTag: "3.0.0.0-am4.0.0.0-alpine"
         # Refer to the Kubernetes documentation on updating images (https://kubernetes.io/docs/concepts/containers/images/#updating-images)
         imagePullPolicy: Always
 
@@ -92,8 +92,8 @@ wso2:
         # Container image configurations
         # If a custom image must be used, uncomment 'dockerRegistry' and provide its value
         # dockerRegistry: ""
-        imageName: "wso2-obiam-toolkit-uk"
-        imageTag: "1.0.0.9-acc3.0.0.76-is6.0.0.71"
+        imageName: "wso2-obiam"
+        imageTag: "3.0.0.0-is5.11.0.0-alpine"
         # Refer to the Kubernetes documentation on updating images (https://kubernetes.io/docs/concepts/containers/images/#updating-images)
         imagePullPolicy: Always
 
@@ -141,9 +141,9 @@ wso2:
         connector:
           name: "wso2is-extensions"
           # Connector name
-          version: "1.6.8"
+          version: "1.2.10"
           # The URL to download the IS connector
-          url: "https://apim.docs.wso2.com/en/4.2.0/assets/attachments/administer/wso2is-extensions-1.6.8.zip"
+          url: "https://apim.docs.wso2.com/en/4.0.0/assets/attachments/administer/wso2is-extensions-1.2.10.zip"
 
         # Configure Ingress for Open Banking Identity & Access Management Module service
         ingress:
