@@ -39,9 +39,9 @@ spec:
           command: ['sh', '-c', 'wget -O {{ .Values.wso2.deployment.ob.iam.connector.name }}-{{ .Values.wso2.deployment.ob.iam.connector.version }}.zip {{ .Values.wso2.deployment.ob.iam.connector.url }} && unzip {{ .Values.wso2.deployment.ob.iam.connector.name }}-{{ .Values.wso2.deployment.ob.iam.connector.version }}.zip && rm -f {{ .Values.wso2.deployment.ob.iam.connector.name }}-{{ .Values.wso2.deployment.ob.iam.connector.version }}.zip' ]
           volumeMounts:
           - name: is-extension-dropins
-            mountPath: "/wso2is-extensions-1.6.8/dropins"
+            mountPath: "/wso2is-extensions-1.2.10/dropins"
           - name: is-extension-webapps
-            mountPath: "/wso2is-extensions-1.6.8/webapps"
+            mountPath: "/wso2is-extensions-1.2.10/webapps"
       containers:
         - name: obiam
           {{ if .Values.wso2.deployment.ob.iam.dockerRegistry }}

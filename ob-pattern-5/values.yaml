@@ -68,7 +68,7 @@ wso2:
           # Ingress configurations for Open Banking API Manager service
           management:
             # Hostname for Open Banking API Manager Carbon Management Console
-            hostname: "obam"
+            hostname: "obam.com"
             # Annotations for the Open Banking API Manager services Ingress
             annotations:
               kubernetes.io/ingress.class: "nginx"
@@ -98,7 +98,7 @@ wso2:
         imagePullPolicy: Always
 
         # Number of deployment replicas
-        replicas: 2
+        replicas: 1
 
         # Indicates whether the container is running
         livenessProbe:
@@ -150,7 +150,7 @@ wso2:
           # Ingress configurations for Open Banking Identity & Access Management Module service
           management:
             # Hostname for Open Banking Identity & Access Management Module service
-            hostname: "obiam"
+            hostname: "obiam.com"
             # Annotations for the Open Banking Identity & Access Management Module service Ingress
             annotations:
               kubernetes.io/ingress.class: "nginx"
