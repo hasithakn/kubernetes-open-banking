@@ -162,8 +162,8 @@ data:
     password= "${admin.password}"
     ws_endpoint = "ws://{{ template "ob-pattern-5.resource.prefix" . }}-obam-service:9099"
     wss_endpoint = "wss://{{ template "ob-pattern-5.resource.prefix" . }}-obam-service:8099"
-    http_endpoint = "http://{{ .Values.wso2.deployment.ob.am.ingress.gateway.hostname }}:${http.nio.port}"
-    https_endpoint = "https://{{ .Values.wso2.deployment.ob.am.ingress.gateway.hostname }}:${https.nio.port}"
+    http_endpoint = "http://{{ template "ob-pattern-5.resource.prefix" . }}-obam-service:${http.nio.port}"
+    https_endpoint = "https://{{ template "ob-pattern-5.resource.prefix" . }}-obam-service:${https.nio.port}"
     websub_event_receiver_http_endpoint = "http://{{ template "ob-pattern-5.resource.prefix" . }}-obam-service:9021"
     websub_event_receiver_https_endpoint = "https://{{ template "ob-pattern-5.resource.prefix" . }}-obam-service:8021"
 
@@ -222,8 +222,8 @@ data:
     ServerURL = "https://{{ template "ob-pattern-5.resource.prefix" . }}-obiam-service:9446${carbon.context}services/"
     Username = "${admin.username}"
     Password = "${admin.password}"
-    TokenURL = "https://{{ template "ob-pattern-5.resource.prefix" . }}-obiam-service:${https.nio.port}/token"
-    RevokeURL = "https://{{ template "ob-pattern-5.resource.prefix" . }}-obiam-service:${https.nio.port}/revoke"
+    TokenURL = "https://{{ template "ob-pattern-5.resource.prefix" . }}-obiam-service:9446/token"
+    RevokeURL = "https://{{ template "ob-pattern-5.resource.prefix" . }}-obiam-service:9446/revoke"
 
     #[apim.idp]
     #server_url = "https://localhost:${mgt.transport.https.port}"
@@ -609,6 +609,9 @@ data:
     [open_banking.keyManager]
     name = "OBKM"
 
+    [open_banking.gateway.consent.validation]
+    endpoint= "https://wso2ob-pattern-5-obiam-service:9446/api/openbanking/consent/validate"
+
     #===================for certificate management====================
     [open_banking.gateway.certificate_management.certificate]
     cache_expiry = 3600
@@ -687,3 +690,6 @@ data:
     size_limit=51200
     connection_timeout=2000
     read_timeout=2000
+
+    [transport.https]
+    properties.proxyPort = 443

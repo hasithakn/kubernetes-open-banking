@@ -20,7 +20,7 @@ data:
     [server]
     hostname = "{{ .Values.wso2.deployment.ob.iam.ingress.management.hostname }}"
     node_ip = "$env{NODE_IP}"
-    base_path = "https://$ref{server.hostname}:${carbon.management.port}"
+    base_path = "https://$ref{server.hostname}:443"
     serverDetails = "WSO2 IS as KM 5.11.0"
     mode = "single"
     userAgent = "WSO2 IS as KM 5.11.0"
@@ -435,8 +435,8 @@ data:
     #=======================dcr configs======================
     [open_banking.dcr]
     validator = "com.wso2.openbanking.accelerator.identity.dcr.validation.DefaultRegistrationValidatorImpl"
-    jwks_url_sandbox = "https://keystore.openbankingtest.org.uk/0015800001HQQrZAAX/9b5usDpbNtmxDcTzs7GzKp.jwks"
-    jwks_url_production = "https://keystore.openbankingtest.org.uk/0015800001HQQrZAAX/9b5usDpbNtmxDcTzs7GzKp.jwks"
+    jwks_url_sandbox = "https://keystore.openbankingtest.org.uk/0015800001HQQrZAAX/0015800001HQQrZAAX.jwks"
+    jwks_url_production = "https://keystore.openbankingtest.org.uk/0015800001HQQrZAAX/0015800001HQQrZAAX.jwks"
     applicationupdater = "com.wso2.openbanking.accelerator.identity.listener.application.ApplicationUpdaterImpl"
     use_softwareIdForAppName = true
     append_registration_attributes_in_response = false
