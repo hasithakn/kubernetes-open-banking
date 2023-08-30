@@ -71,7 +71,7 @@ data:
     #Use below for oracle
     #validationQuery="SELECT 1 FROM DUAL"
     validationInterval="30000"
-    defaultAutoCommit=false
+    defaultAutoCommit=true
 
     # for api manager data
     [database.apim_db]
@@ -89,7 +89,7 @@ data:
     #Use below for oracle
     #validationQuery="SELECT 1 FROM DUAL"
     validationInterval="30000"
-    defaultAutoCommit=false
+    defaultAutoCommit=true
 
     # for am-config registry
     [database.config]
@@ -107,7 +107,7 @@ data:
     #Use below for oracle
     #validationQuery="SELECT 1 FROM DUAL"
     validationInterval="30000"
-    defaultAutoCommit=false
+    defaultAutoCommit=true
 
     # for user management data
     [[datasource]]
@@ -125,7 +125,7 @@ data:
     #Use below for oracle
     #validationQuery="SELECT 1 FROM DUAL"
     pool_options.validationInterval="30000"
-    pool_options.defaultAutoCommit=false
+    pool_options.defaultAutoCommit=true
 
     [tenant_mgt]
     enable_email_domain = true
@@ -498,10 +498,10 @@ data:
     enable=false
 
     [open_banking.data_publishing]
-    enable = false
+    enable = true
     username="$ref{super_admin.username}@carbon.super"
     password="$ref{super_admin.password}"
-    server_url = "{tcp://localhost:7612}"
+    server_url = "{tcp://wso2ob-pattern-5-obbi-service:7612}"
     #auth_url = "{ssl://BI_HOSTNAME:7612}"
     protocol = "Thrift"
     pool_size = 10
