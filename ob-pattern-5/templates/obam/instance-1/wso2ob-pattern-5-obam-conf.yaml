@@ -296,14 +296,14 @@ data:
     #port = 10005
 
     [[apim.throttling.url_group]]
-    traffic_manager_urls = ["tcp://{{ template "ob-pattern-5.resource.prefix" . }}-obam-1-service:9611"]
-    traffic_manager_auth_urls = ["ssl://{{ template "ob-pattern-5.resource.prefix" . }}-obam-1-service:9711"]
+    traffic_manager_urls = ["tcp://localhost:9611"]
+    traffic_manager_auth_urls = ["ssl://localhost:9711"]
     type = "loadbalance"
 
     [[apim.throttling.url_group]]
     traffic_manager_urls = ["tcp://{{ template "ob-pattern-5.resource.prefix" . }}-obam-2-service:9611"]
     traffic_manager_auth_urls = ["ssl://{{ template "ob-pattern-5.resource.prefix" . }}-obam-2-service:9711"]
-    type = "loadbalance"
+    type = "failover"
 
     #[apim.workflow]
     #enable = false
@@ -495,14 +495,14 @@ data:
     priority = 1000
 
     [open_banking.apim.analytics]
-    enable=false
+    enable=true
 
     [open_banking.data_publishing]
     enable = true
     username="$ref{super_admin.username}@carbon.super"
     password="$ref{super_admin.password}"
     server_url = "{tcp://wso2ob-pattern-5-obbi-service:7612}"
-    #auth_url = "{ssl://BI_HOSTNAME:7612}"
+    #auth_url = "{ssl://wso2ob-pattern-5-obbi-service:7712}"
     protocol = "Thrift"
     pool_size = 10
     queue_size = 32768
