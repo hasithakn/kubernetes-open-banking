@@ -5129,7 +5129,7 @@ mysql:
       )
 
       ENGINE INNODB;
-    mysql_db_open_banking_store.sql: >-
+    mysql_db_open_banking_reporting.sql: >-
       DROP DATABASE IF EXISTS openbank_ob_reporting_statsdb;
       CREATE DATABASE openbank_ob_reporting_statsdb CHARACTER SET latin1 COLLATE latin1_swedish_ci;
       GRANT ALL ON openbank_ob_reporting_statsdb.* TO 'wso2carbon'@'%';

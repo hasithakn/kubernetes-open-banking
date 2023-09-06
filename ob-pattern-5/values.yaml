@@ -77,6 +77,7 @@ wso2:
               nginx.ingress.kubernetes.io/session-cookie-name: "route"
               nginx.ingress.kubernetes.io/session-cookie-hash: "sha1"
               nginx.ingress.kubernetes.io/ssl-passthrough: "true"
+              nginx.ingress.kubernetes.io/proxy-buffer-size: "16k"
           
           # Ingress configurations for Gateway profile service
           gateway:
@@ -170,7 +171,7 @@ wso2:
         imagePullPolicy: Always
 
         # Number of deployment replicas
-        replicas: 2
+        replicas: 1
 
         # Indicates whether the container is running
         livenessProbe:
