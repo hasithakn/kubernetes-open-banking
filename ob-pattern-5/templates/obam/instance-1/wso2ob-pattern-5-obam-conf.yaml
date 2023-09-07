@@ -201,7 +201,7 @@ data:
 
     [apim.analytics]
     #this needs to be enabled in order to use openbanking data publishing.
-    enable = true
+    enable = false
     config_endpoint = "https://analytics-event-auth.st.choreo.dev/auth/v1"
     auth_token = ""
     properties.'publisher.reporter.class' = "com.wso2.openbanking.accelerator.gateway.reporter.OBAnalyticsMetricReporter"
@@ -495,10 +495,10 @@ data:
     priority = 1000
 
     [open_banking.apim.analytics]
-    enable=true
+    enable=false
 
     [open_banking.data_publishing]
-    enable = true
+    enable = false
     username="$ref{super_admin.username}@carbon.super"
     password="$ref{super_admin.password}"
     server_url = "{tcp://wso2ob-pattern-5-obbi-service:7612}"

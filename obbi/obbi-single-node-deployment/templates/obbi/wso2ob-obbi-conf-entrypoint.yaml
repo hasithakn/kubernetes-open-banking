@@ -12,7 +12,7 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: {{ template "ob-pattern-5.resource.prefix" . }}-obbi-conf-entrypoint
+  name: {{ template "obbi.resource.prefix" . }}-conf-entrypoint
   namespace: {{ .Release.Namespace }}
 data:
   docker-entrypoint.sh: |
