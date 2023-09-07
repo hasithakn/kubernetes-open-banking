@@ -7,6 +7,10 @@ of WSO2 Open Banking.*
 
 * [Deployment Pattern 5](ob-pattern-5/README.md)
 
+## Helm resources for Open Banking deployment pattern
+
+* [Deployment Pattern 5](ob-pattern-5/README.md)
+
 ## Changelog
 
 **Change log** from previous `v1.5.0.1` release: [View Here](CHANGELOG.md)

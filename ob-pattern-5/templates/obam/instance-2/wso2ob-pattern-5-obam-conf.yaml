@@ -501,8 +501,8 @@ data:
     enable = false
     username="$ref{super_admin.username}@carbon.super"
     password="$ref{super_admin.password}"
-    server_url = "{tcp://wso2ob-pattern-5-obbi-service:7612}"
-    #auth_url = "{ssl://wso2ob-pattern-5-obbi-service:7712}"
+    server_url = "{tcp://wso2ob-obbi-service:7612}"
+    #auth_url = "{ssl://wso2ob-obbi-service:7712}"
     protocol = "Thrift"
     pool_size = 10
     queue_size = 32768
