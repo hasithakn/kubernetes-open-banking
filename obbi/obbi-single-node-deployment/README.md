@@ -14,6 +14,8 @@ Resources for building a Helm chart for deployment of WSO2 Open Banking Business
 
 * Please refer to the README.md in `ob-pattern-5/README.md` on setting up WSO2 obiam and obam.
 
+* Make sure data reporting DBs are created. ( `openbank_ob_reporting_statsdb`, `openbank_ob_reporting_summarizeddb` )
+
 * Enable data publishing https://ob.docs.wso2.com/en/latest/get-started/data-publishing-try-out/
 
   * Enabling API Manager analytics in `ob-pattern-5/templates/obam/instance-1/wso2ob-pattern-5-obam-conf.yaml` and `ob-pattern-5/templates/obam/instance-2/wso2ob-pattern-5-obam-conf.yaml`: 
