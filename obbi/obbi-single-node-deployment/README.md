@@ -21,10 +21,11 @@ Resources for building a Helm chart for deployment of WSO2 Open Banking Business
     [apim.analytics]
     enable = true
     ```
-  * Enabling OB data publishing in API Manager and IAM in `ob-pattern-5/templates/obiam/wso2ob-pattern-5-obiam-conf.yaml`, `ob-pattern-5/templates/obam/instance-1/wso2ob-pattern-5-obam-conf.yaml` and `ob-pattern-5/templates/obam/instance-2/wso2ob-pattern-5-obam-conf.yaml`:
+  * Enabling OB data publishing and configure the obbi server url in API Manager and IAM in `ob-pattern-5/templates/obiam/wso2ob-pattern-5-obiam-conf.yaml`, `ob-pattern-5/templates/obam/instance-1/wso2ob-pattern-5-obam-conf.yaml` and `ob-pattern-5/templates/obam/instance-2/wso2ob-pattern-5-obam-conf.yaml`:
     ```azure
     [open_banking.data_publishing]
     enable = true
+    server_url = "{tcp://wso2ob-obbi-service:7612}"
     ```
 ## Quick Start Guide
 
