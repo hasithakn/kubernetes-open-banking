@@ -17,7 +17,7 @@ wso2:
   deployment:
     dependencies:
       # The configuration should be set to be 'true' if a MySQL database should be spawned as a pod within the cluster
-      ob-pattern-5: true
+      ob-pattern-5: false
     ob:
       bi:
         # Container image configurations
