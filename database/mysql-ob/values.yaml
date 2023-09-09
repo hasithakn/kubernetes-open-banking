@@ -5147,3 +5147,11 @@ mysql:
       DROP DATABASE IF EXISTS openbank_ob_reporting_summarizeddb;
       CREATE DATABASE openbank_ob_reporting_summarizeddb CHARACTER SET latin1 COLLATE latin1_swedish_ci;
       GRANT ALL ON openbank_ob_reporting_summarizeddb.* TO 'wso2carbon'@'%';
+      
+      DROP DATABASE IF EXISTS PERSISTENCE_DB;
+      CREATE DATABASE PERSISTENCE_DB CHARACTER SET latin1 COLLATE latin1_swedish_ci;
+      GRANT ALL ON PERSISTENCE_DB.* TO 'wso2carbon'@'%';
+      
+      DROP DATABASE IF EXISTS WSO2_CLUSTER_DB;
+      CREATE DATABASE WSO2_CLUSTER_DB CHARACTER SET latin1 COLLATE latin1_swedish_ci;
+      GRANT ALL ON WSO2_CLUSTER_DB.* TO 'wso2carbon'@'%';
