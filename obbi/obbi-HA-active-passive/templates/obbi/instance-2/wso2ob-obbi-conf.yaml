@@ -503,9 +503,9 @@ data:
       passiveNodeDetailsWaitTimeOutMillis: 300000
       passiveNodeDetailsRetrySleepTimeMillis: 500
       eventSyncServer:
-        host: localhost
+        host: 0.0.0.0
         port: 9893
-        advertisedHost: localhost
+        advertisedHost: {{ template "obbi.resource.prefix" . }}-obbi-2-service
         advertisedPort: 9893
         bossThreads: 10
         workerThreads: 10

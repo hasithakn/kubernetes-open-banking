@@ -38,3 +38,6 @@ spec:
   - name: health-check
     port: 9092
     protocol: TCP
+  - name: event-sync-tcp-port
+    port: 9893
+    protocol: TCP

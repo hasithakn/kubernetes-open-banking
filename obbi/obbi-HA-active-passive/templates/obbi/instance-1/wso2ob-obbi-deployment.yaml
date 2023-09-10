@@ -61,6 +61,8 @@ spec:
               protocol: TCP
             - containerPort: 9444
               protocol: TCP
+            - containerPort: 9893
+              protocol: TCP
           livenessProbe:
             exec:
               command:
