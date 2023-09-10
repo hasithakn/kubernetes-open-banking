@@ -7,9 +7,10 @@ of WSO2 Open Banking.*
 
 * [Deployment Pattern 5](ob-pattern-5/README.md)
 
-## Helm resources for Open Banking deployment pattern
+## Helm resources for Open Banking Business Intelligence module.
 
-* [Deployment Pattern 5](ob-pattern-5/README.md)
+* [obbi-HA-active-passive](obbi/obbi-HA-active-passive)
+* [obbi-single-node-deployment](obbi/obbi-single-node-deployment)
 
 ## Changelog
 
