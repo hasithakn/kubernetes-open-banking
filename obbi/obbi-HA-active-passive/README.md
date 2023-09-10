@@ -14,21 +14,28 @@ Resources for building a Helm chart for deployment of WSO2 Open Banking Business
 
 * Please refer to the README.md in `ob-pattern-5/README.md` on setting up WSO2 obiam and obam.
 
-* Make sure data reporting DBs are created. ( `openbank_ob_reporting_statsdb`, `openbank_ob_reporting_summarizeddb` )
+* Make sure data reporting DBs are created. ( `openbank_ob_reporting_statsdb`, `openbank_ob_reporting_summarizeddb` , `PERSISTENCE_DB` and `WSO2_CLUSTER_DB` )
+  (https://apim.docs.wso2.com/en/4.0.0/install-and-setup/setup/si-deployment/deploying-si-as-minimum-ha-cluster/)
 
 * Enable data publishing https://ob.docs.wso2.com/en/latest/get-started/data-publishing-try-out/
 
-    * Enabling API Manager analytics in `ob-pattern-5/templates/obam/instance-1/wso2ob-pattern-5-obam-conf.yaml` and `ob-pattern-5/templates/obam/instance-2/wso2ob-pattern-5-obam-conf.yaml`:
-      ```azure
-      [apim.analytics]
-      enable = true
-      ```
-    * Enabling OB data publishing and configure the obbi server url in API Manager and IAM in `ob-pattern-5/templates/obiam/wso2ob-pattern-5-obiam-conf.yaml`, `ob-pattern-5/templates/obam/instance-1/wso2ob-pattern-5-obam-conf.yaml` and `ob-pattern-5/templates/obam/instance-2/wso2ob-pattern-5-obam-conf.yaml`:
-      ```azure
-      [open_banking.data_publishing]
-      enable = true
-      server_url = "{tcp://wso2ob-obbi-service:7612}"
-      ```
+  * Enabling API Manager analytics in `ob-pattern-5/templates/obam/instance-1/wso2ob-pattern-5-obam-conf.yaml` and `ob-pattern-5/templates/obam/instance-2/wso2ob-pattern-5-obam-conf.yaml`: 
+    ```azure
+    [apim.analytics]
+    enable = true
+    ```
+  * Enabling OB data publishing and configure the obbi server url in API Manager and IAM in `ob-pattern-5/templates/obiam/wso2ob-pattern-5-obiam-conf.yaml`, `ob-pattern-5/templates/obam/instance-1/wso2ob-pattern-5-obam-conf.yaml` and `ob-pattern-5/templates/obam/instance-2/wso2ob-pattern-5-obam-conf.yaml`:
+  * This is the service URL of `obbi/obbi-HA-active-passive/templates/obbi/wso2ob-obbi-service.yaml`
+    ```azure
+    [open_banking.data_publishing]
+    enable = true
+    server_url = "{tcp://wso2ob-obbi-service:7612}"
+    ```
+
+* In this deployment pattern (active-passive), Readiness probe is defined as the the thrift data publishing port (7611), 
+* This is because, we need to publish data only to the active node and only the active node open 7611 port.
+* By configuring passive node is not ready , we can omit the traffic flow to passive node.
+
 ## Quick Start Guide
 
 #### Install Chart From Source
