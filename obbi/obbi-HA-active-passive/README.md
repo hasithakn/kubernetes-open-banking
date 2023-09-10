@@ -32,9 +32,8 @@ Resources for building a Helm chart for deployment of WSO2 Open Banking Business
     server_url = "{tcp://wso2ob-obbi-service:7612}"
     ```
 
-* In this deployment pattern (active-passive), Readiness probe is defined as the the thrift data publishing port (7612), 
-* This is because, we need to publish data only to the active node and only the active node open 7612 port.
-* By configuring passive node is not ready , we can omit the traffic flow to passive node.
+* In this deployment readiness probe is defined as the thrift data publishing port (7612), 
+* This is because we need to publish data only to the active node and only the active node opens the 7612 port. By configuring the passive node is not ready, we can omit the traffic flow to the passive node.
 
 ## Quick Start Guide
 
