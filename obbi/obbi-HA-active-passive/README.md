@@ -24,13 +24,14 @@ Resources for building a Helm chart for deployment of WSO2 Open Banking Business
     [apim.analytics]
     enable = true
     ```
-  * Enabling OB data publishing and configure the obbi server url in API Manager and IAM in `ob-pattern-5/templates/obiam/wso2ob-pattern-5-obiam-conf.yaml`, `ob-pattern-5/templates/obam/instance-1/wso2ob-pattern-5-obam-conf.yaml` and `ob-pattern-5/templates/obam/instance-2/wso2ob-pattern-5-obam-conf.yaml`:
-  * This is the service URL of `obbi/obbi-HA-active-passive/templates/obbi/wso2ob-obbi-service.yaml`
+  * Enabling OB data publishing and configure the obbi server urls in API Manager and IAM in `ob-pattern-5/templates/obiam/wso2ob-pattern-5-obiam-conf.yaml`, `ob-pattern-5/templates/obam/instance-1/wso2ob-pattern-5-obam-conf.yaml` and `ob-pattern-5/templates/obam/instance-2/wso2ob-pattern-5-obam-conf.yaml`:
+  * This is the service URLs of `obbi/obbi-HA-active-passive/templates/obbi/instance-1/wso2ob-obbi-service.yaml` and ``obbi/obbi-HA-active-passive/templates/obbi/instance-2/wso2ob-obbi-service.yaml``
     ```azure
     [open_banking.data_publishing]
     enable = true
-    server_url = "{tcp://wso2ob-obbi-service:7612}"
+    server_url = "{tcp://wso2ob-obbi-1-service:7612|tcp://wso2ob-obbi-2-service:7612}"
     ```
+  * Here we are adding two thrift data publishing urls of obbi, If one is unreachable then it tries the 2nd url. 
 
 * In this deployment readiness probe is defined as the thrift data publishing port (7612), 
 * This is because we need to publish data only to the active node and only the active node opens the 7612 port. By configuring the passive node is not ready, we can omit the traffic flow to the passive node.
