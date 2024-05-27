@@ -4,6 +4,16 @@ Resources for building a Helm chart for deployment of WSO2 Open Banking API Mana
 support
 ![WSO2 Open Banking pattern 5 deployment](https://raw.githubusercontent.com/wso2/kubernetes-open-banking/v3.0.0.1/ob-pattern-5/pattern-5.png)
 
+Note : 
+  - UK toolkit is used as a reference toolkit throughout the documentation and in the sample helm chart.
+  - Accelerator docker images are available at [WSO2 Private Docker Registry](https://docker.wso2.com/) and UK toolkit docker images need to be built using the accelerator docker images with the required customizations.
+    - Dockerfile for [wso2-obiam-toolkit-uk](https://github.com/wso2/docker-open-banking/blob/master/dockerfiles/alpine/obiam-uk/Dockerfile)
+    - Dockerfile for [wso2-obam-toolkit-uk](https://github.com/wso2/docker-open-banking/blob/master/dockerfiles/alpine/obam-uk/Dockerfile)
+    - Reference on accelerator docker deployment, https://ob.docs.wso2.com/en/latest/install-and-setup/deploy-with-docker/
+    - Reference on accelerator docker images, https://github.com/wso2/docker-open-banking/tree/master
+  - UK toolkit configurations are added as Config-maps in `templates/obiam/wso2ob-pattern-5-obiam-conf.yaml` and `templates/obam/<instance-id>/wso2ob-pattern-5-obam-conf.yaml` locations.
+  - These needs to update accordingly for custom toolkit deployments.
+
 ## Contents
 
 * [Prerequisites](#prerequisites)
@@ -14,12 +24,10 @@ support
 
 ## Prerequisites
 
-* WSO2 product Docker images used for the Kubernetes deployment.
-
   For a production grade deployment of the desired WSO2 product-version, it is highly recommended to use the relevant
-  Docker image which packages WSO2 Updates, available at [WSO2 Private Docker Registry](https://docker.wso2.com/).
+  OB Accelerator docker image when building the UK toolkit docker image which packages WSO2 Updates, available at [WSO2 Private Docker Registry](https://docker.wso2.com/).
   
-  In order to use these images, you need an active [WSO2 Subscription](https://wso2.com/subscription).
+  In order to use latest OB Accelerator docker images, you need an active [WSO2 Subscription](https://wso2.com/subscription).
   <br><br>
 
 * Install [Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git), [Helm](https://helm.sh/docs/intro/install/)
