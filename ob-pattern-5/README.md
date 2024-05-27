@@ -12,7 +12,7 @@ Note :
     - Reference on accelerator docker deployment, https://ob.docs.wso2.com/en/latest/install-and-setup/deploy-with-docker/
     - Reference on accelerator docker images, https://github.com/wso2/docker-open-banking/tree/master
   - UK toolkit configurations are added as Config-maps in `templates/obiam/wso2ob-pattern-5-obiam-conf.yaml` and `templates/obam/<instance-id>/wso2ob-pattern-5-obam-conf.yaml` locations.
-  - These needs to update accordingly for custom toolkit deployments.
+  - These changes need to be updated accordingly for custom toolkit deployments.
 
 ## Contents
 
