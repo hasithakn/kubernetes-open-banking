@@ -14,6 +14,83 @@ Note :
   - UK toolkit configurations are added as Config-maps in `templates/obiam/wso2ob-pattern-5-obiam-conf.yaml` and `templates/obam/<instance-id>/wso2ob-pattern-5-obam-conf.yaml` locations.
   - These config changes need to be updated accordingly for custom toolkit deployments.
 
+## Chart Structure
+
+This document provides an overview of the Helm chart structure used for deploying WSO2 Open Banking API Manager with Identity & Access Management Module. Please refer to below chart structure for the customisations.
+
+### `values.yaml`
+- Contains the values used by the templates for configuring the deployment.
+
+### `/charts`
+- This directory contains the MySQL database chart used by the deployment.
+
+### `/resources`
+- Contains certificates and private keys for the servers.
+    - `private-keys.jks`: Includes private keys for the servers under different aliases.
+    - `public-certs.jks`: Includes public keys for each server under different aliases. These keys need to be exchanged and added to each server's trust stores.
+
+### `/templates`
+- Contains the main templates for the deployment.
+
+  #### `wso2ob-pattern-5-carbon-certs.yaml`
+    - Defines the Carbon certificates and public keys (from the `/resources` directory) as config maps.
+    - These private and public keys are added to the server at the initial start via the `wso2ob-pattern-5-obam-conf-entrypoint.yaml`.
+    - Note: If adding a custom carbon keys and trustores, ( `wso2carbon.jks` and `client-truststore.jks`) This step is not needed.
+
+  #### `wso2ob-pattern-5-secret.yaml`
+    - Contains Docker pull credentials as Kubernetes Secrets.
+
+  ### `/templates/obam`
+    - For **APIM Deployment Guide**: Please refer to the [APIM deployment guide](https://apim.docs.wso2.com/en/4.2.0/install-and-setup/setup/deployment-overview/).
+
+      #### `wso2ob-pattern-5-obam-conf-entrypoint.yaml`
+        - Contains a shell script used as the server's entrypoint. This script includes the addition of server certificates and private keys from the `/resources` directory.
+
+      #### `wso2ob-pattern-5-obam-service.yaml`
+        - Defines the common service configuration referring to individual service files located at `/<instance-id>/wso2ob-pattern-5-obam-service.yaml`.
+
+      #### `wso2ob-pattern-5-obiam-ingress.yaml`
+        - Defines the ingress to expose the APIM management console for external access on port 9443.
+
+      #### `wso2ob-pattern-5-obam-gateway-ingress.yaml`
+        - Defines the ingress to expose the HTTPS APIM gateway port for external access on port 8243.
+
+      #### `/<instance-id>/wso2ob-pattern-5-obam-conf.yaml`
+        - Contains the UK toolkit's OBAM deployment configuration as a config map for APIM HA deployment.
+
+      #### `/<instance-id>/wso2ob-pattern-5-obam-service.yaml`
+        - Contains the service configuration for the UK toolkit's OBAM deployment, exposing ports 9611, 9711, 5672, and 9443.
+
+      #### `/<instance-id>/wso2ob-pattern-5-obam-deployment.yaml`
+        - Defines the UK toolkit's OBAM deployment. The following volumes are mounted via this deployment.
+            - `deployment-uk.toml`
+            - `docker-entrypoint.sh`
+            - `private-keys.jks`
+            - `public-certs.jks`
+
+  ### `/templates/obiam`
+    - For **IS Deployment Guide**: Please refer to the [IS deployment guide](https://is.docs.wso2.com/en/6.1.0/deploy/deployment-guide/).
+
+      #### `wso2ob-pattern-5-obiam-conf.yaml`
+        - Contains the UK toolkit's OBIAM deployment configuration as a config map for HA deployment.
+
+      #### `wso2ob-pattern-5-obiam-conf-entrypoint.yaml`
+        - Contains a shell script used as the server's entrypoint, including the addition of server certificates and private keys from the `/resources` directory.
+
+      #### `wso2ob-pattern-5-obiam-deployment.yaml`
+        - Defines the UK toolkit's OBIAM deployment. The following volumes are mounted via this deployment.
+            - `deployment-uk.toml`
+            - `docker-entrypoint.sh`
+            - `private-keys.jks`
+            - `public-certs.jks`
+            - `IS connector extension artifacts to run IS as the key manager` (These artifacts are downloaded through an init container and mounted to the Docker image)
+
+      #### `wso2ob-pattern-5-obiam-service.yaml`
+        - Contains the service configuration for the UK toolkit's OBIAM deployment, exposing port 9446.
+
+      #### `wso2ob-pattern-5-obiam-ingress.yaml`
+    - Defines the ingress to expose the WSO2 Identity Server (IS) for external access on port 9446.
+
 ## Contents
 
 * [Prerequisites](#prerequisites)
