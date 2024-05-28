@@ -22,7 +22,7 @@ This document provides an overview of the Helm chart structure used for deployin
 - Contains the values used by the templates for configuring the deployment.
 
 ### `/charts`
-- This directory contains the MySQL database chart used by the deployment.
+- This directory contains the MySQL database chart used by the deployment as a dependency (`/database/mysql-ob/..`) 
 
 ### `/resources`
 - Contains certificates and private keys for the servers.
@@ -33,9 +33,9 @@ This document provides an overview of the Helm chart structure used for deployin
 - Contains the main templates for the deployment.
 
   #### `wso2ob-pattern-5-carbon-certs.yaml`
-    - Defines the Carbon certificates and public keys (from the `/resources` directory) as config maps.
-    - These private and public keys are added to the server at the initial start via the `wso2ob-pattern-5-obam-conf-entrypoint.yaml`.
-    - Note: If adding a custom carbon keys and trustores, ( `wso2carbon.jks` and `client-truststore.jks`) This step is not needed.
+    - Defines the server certificates and private keys (from the `/resources` directory) as config maps.
+    - These private and public keys are added to the server in the initial start via the `wso2ob-pattern-5-obam-conf-entrypoint.yaml`.
+    - Note: If adding a custom keystore and truststore as volume mappings, (Ex: `wso2carbon.jks` and `client-truststore.jks`) This step is not needed.
 
   #### `wso2ob-pattern-5-secret.yaml`
     - Contains Docker pull credentials as Kubernetes Secrets.
