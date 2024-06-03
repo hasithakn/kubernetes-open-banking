@@ -5,7 +5,7 @@ Resources for building a Helm chart for deployment of WSO2 Open Banking UK Toolk
 Note:
 - UK toolkit (OBBI) is used as a reference toolkit throughout the documentation and in the sample helm chart.
 - Accelerator docker (OBBI) images are available at [WSO2 Private Docker Registry](https://docker.wso2.com/) and UK toolkit (OBBI) docker images need to be built using the accelerator docker images with the required customizations.
-  - Dockerfile for [wso2-obbi-toolkit-uk](https://github.com/wso2/docker-open-banking/blob/master/dockerfiles/alpine/obbi-uk/Dockerfile)
+  - Sample Dockerfile for [wso2-obbi-toolkit-uk](https://github.com/wso2/docker-open-banking/blob/master/dockerfiles/alpine/obbi-uk/Dockerfile)
 - Reference on accelerator docker deployment, https://ob.docs.wso2.com/en/latest/install-and-setup/deploy-with-docker/
 - Reference on accelerator docker images, https://github.com/wso2/docker-open-banking/tree/master
 

@@ -7,8 +7,8 @@ support
 Note : 
   - UK toolkit is used as a reference toolkit throughout the documentation and in the sample helm chart.
   - Accelerator docker images are available at [WSO2 Private Docker Registry](https://docker.wso2.com/) and UK toolkit docker images need to be built using the accelerator docker images with the required customizations.
-    - Dockerfile for [wso2-obiam-toolkit-uk](https://github.com/wso2/docker-open-banking/blob/master/dockerfiles/alpine/obiam-uk/Dockerfile)
-    - Dockerfile for [wso2-obam-toolkit-uk](https://github.com/wso2/docker-open-banking/blob/master/dockerfiles/alpine/obam-uk/Dockerfile)
+    - Sample Dockerfile for [wso2-obiam-toolkit-uk](https://github.com/wso2/docker-open-banking/blob/master/dockerfiles/alpine/obiam-uk/Dockerfile)
+    - Sample Dockerfile for [wso2-obam-toolkit-uk](https://github.com/wso2/docker-open-banking/blob/master/dockerfiles/alpine/obam-uk/Dockerfile)
     - Reference on accelerator docker deployment, https://ob.docs.wso2.com/en/latest/install-and-setup/deploy-with-docker/
     - Reference on accelerator docker images, https://github.com/wso2/docker-open-banking/tree/master
   - UK toolkit configurations are added as Config-maps in `templates/obiam/wso2ob-pattern-5-obiam-conf.yaml` and `templates/obam/<instance-id>/wso2ob-pattern-5-obam-conf.yaml` locations.
